@@ -7,7 +7,7 @@ The Local Theatre Company is a blog platform crated using C# and ASP.NET MVC 5 f
 ![Blog Post screen](https://github.com/Pio-Trek/Local-Theatre-Company-Blog/blob/master/art/blog_post.jpg)
 
 ###### Users List (admin settings)
-![Users List](https://github.com/Pio-Trek/Local-Theatre-Company-Blog/blob/master/art/admin_users_lists.jpg)
+![Users List](https://github.com/Pio-Trek/Local-Theatre-Company-Blog/blob/master/art/admin_users_list.jpg)
 
 ###### Contact Page
 ![Contact Page](https://github.com/Pio-Trek/Local-Theatre-Company-Blog/blob/master/art/contact_page.jpg)
