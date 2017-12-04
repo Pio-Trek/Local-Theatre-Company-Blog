@@ -1,7 +1,7 @@
 # 💃 Local Theatre Company Blog 🕺
 
 This web app was created as an assessment project for Web Application for "Developing Websites for Multiplatform" Unit.
-The Local Theatre Company is a blog platform crated using C# and ASP.NET MVC 5 framework. It allows to sign up new user, posting a blog post, moderate comment, edit users list and much more.
+The Local Theatre Company is a blog platform created using C# and ASP.NET MVC 5 framework. The web page is fully responsive (render well on a variety of devices and window or screen sizes).
 
 ### Sample Blog Post Screen
 ![Blog Post screen](https://github.com/Pio-Trek/Local-Theatre-Company-Blog/blob/master/art/blog_post.jpg)
@@ -10,7 +10,18 @@ The Local Theatre Company is a blog platform crated using C# and ASP.NET MVC 5 f
 ![Users List](https://github.com/Pio-Trek/Local-Theatre-Company-Blog/blob/master/art/admin_users_list.jpg)
 
 ### Contact Page
-![Contact Page](https://github.com/Pio-Trek/Local-Theatre-Company-Blog/blob/master/art/contact_page.jpg)
+![Contact Page](https://github.com/Pio-Trek/Local-Theatre-Company-Blog/blob/master/art/contact_page.jpg)#
+
+## Features
+
+- Register new users
+- Post a blog post (Writer and Admin role only)
+- Post comments (everyone who's registered)
+- Moderate comments (Writer and Admin role only)
+- Promote Users to Writer role (Admin only)
+- Add/Update/Remove blog post and profile image
+- Change account details (login, password, name etc.)
+
 
 ## Pre-requisites
 
