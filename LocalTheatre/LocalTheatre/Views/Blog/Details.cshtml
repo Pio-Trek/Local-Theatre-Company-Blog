@@ -1,0 +1,140 @@
+﻿@using LocalTheatre.Models
+@using Microsoft.Ajax.Utilities
+@model Blog
+
+@{
+    ViewBag.Title = Model.Title;
+
+    var db = new ApplicationDbContext();
+    var commentsCount = db.Comments.Count(c => c.BlogId == Model.Id && c.IsModerated);
+
+    if (commentsCount == 0)
+    {
+        ViewBag.CommentsNumber = "No comments";
+    }
+    else if (commentsCount == 1)
+    {
+        ViewBag.CommentsNumber = commentsCount + " Comment";
+    }
+    else
+    {
+        ViewBag.CommentsNumber = commentsCount + " Comments";
+    }
+}
+
+<div class="section section-basic">
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <h2 class="text-center">
+                @Html.DisplayFor(modelItem => Model.Title)
+            </h2>
+            <div class="text-center center-block text-muted">
+                <a class="btn btn-simple btn-just-icon" style="cursor: default">
+                    <i class="material-icons">event</i>
+                </a>&nbsp;@Html.DisplayFor(modelItem => Model.PublishDate)
+                <a class="btn btn-simple btn-just-icon" style="cursor: default">
+                    <i class="material-icons ">access_time</i>
+                </a>&nbsp;@Model.PublishDate.ToString("HH:mm:ss")
+                <a class="btn btn-simple btn-just-icon" style="cursor: default">
+                    <i class="material-icons ">face</i>
+                </a>&nbsp;@GetFromContext.AuthorName(Model.AuthorId)
+                @{
+                    var commentCount = db.Comments.Count(c => c.BlogId == Model.Id && c.IsModerated);
+                }
+                <a class="btn btn-simple btn-just-icon" style="cursor: default">
+                    <i class="material-icons ">comment</i>
+                </a>&nbsp;Comments: @commentCount
+
+                @if (User.IsInRole(RoleName.Admin) || User.IsInRole(RoleName.Writer))
+                {
+                    @: &nbsp;
+                    <a href="@Url.Action("Edit", new {id = Model.Id})" class="btn btn-success btn-xs">Edit</a>
+                    <a href="@Url.Action("Delete", new {id = Model.Id})" class="btn btn-danger btn-xs">Delete</a>
+                }
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        @{
+            if (!Model.CoverUrl.IsNullOrWhiteSpace())
+            {
+                <div class="img-blog-margin center-block" style="max-width: 700px">
+                    <img src="@Model.CoverUrl" alt="@Model.Title" class="img-responsive img-thumbnail">
+                </div>
+            }
+        }
+
+
+        <div class="tab-space">
+
+            @Html.Raw(Html.Encode(Model.Article).Replace("\n", "<br />"))
+
+        </div>
+
+
+        <div>
+            <button class="btn btn-info " onclick="location.href = '@Url.Action("Index")';return false;"><i class="material-icons">arrow_back</i> Back</button>
+        </div>
+
+        @{
+            if (Request.IsAuthenticated)
+            {
+                @Html.Action("_AddComment", "Comment", new {id = Model.Id})
+            }
+            else
+            {
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <div class="alert alert-info">
+                                <div class="container-fluid">
+                                    <div class="alert-icon">
+                                        <i class="material-icons">info_outline</i>
+                                    </div>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">
+                                            <i class="material-icons">clear</i>
+                                        </span>
+                                    </button>
+                                    To leave a comment, you need to be login. <a href='@Url.Action("Login", "Account", new {returnUrl = Request.Url.PathAndQuery}, null)'>
+                                        <strong>Login here</strong>
+                                    </a> or <a href='@Url.Action("Register", "Account", new {returnUrl = Request.Url.PathAndQuery}, null)'>
+                                        <strong>register</strong>
+                                    </a> as a new user.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        
+
+        @if (ViewBag.Confirmation != null)
+        {
+            <div class="alert alert-warning">
+                <div class="container-fluid">
+                    <div class="alert-icon">
+                        <i class="material-icons">warning</i>
+                    </div>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">
+                            <i class="material-icons">clear</i>
+                        </span>
+                    </button>
+                    <b>@ViewBag.Confirmation</b>
+                </div>
+            </div>
+        }
+
+    </div>
+
+    <br>
+    
+    @Html.Partial("_Comment", Model.Comments)
+
+</div>

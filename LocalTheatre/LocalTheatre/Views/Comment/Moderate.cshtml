@@ -1,0 +1,147 @@
+﻿@using LocalTheatre.Models
+@model List<Comment>
+
+@{
+    ViewBag.Title = "Moderate";
+
+    @Scripts.Render("~/bundles/jquery")
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#rowclick #comments')
+                .filter(':has(:checkbox:checked)')
+                .addClass('danger')
+                .end()
+                .click(function(event) {
+                    $(this).toggleClass('danger');
+                    if (event.target.type !== 'checkbox') {
+                        $(':checkbox', this).attr('checked',
+                            function() {
+                                return !this.checked;
+                            });
+                    }
+                });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("input[name='action:Delete']").click(function() {
+                return confirm('Delete all selected elements?');
+            });
+        });
+    </script>
+}
+
+
+<div class="section section-basic">
+
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+
+            <h2 class="text-center">
+                Moderate new comments
+            </h2>
+
+
+            @if (Model.Count != 0)
+            {
+                <div class="row">
+                    <form method="get">
+                        <div class="input-group col-md-4 pull-right">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Filter comments...</label>
+                                <input type="text" class="form-control" name="search">
+                            </div>
+                            <span class="input-group-btn">
+                                <button class="btn btn-default btn-xs" type="submit">Search</button>
+                            </span>
+
+                        </div>
+                    </form>
+                </div>
+            }
+
+
+            @if (Model.Count != 0)
+            {
+                var commentCount = 0;
+                using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <table class="table table-striped table-hover" id="rowclick">
+                        <thead>
+                        <tr>
+                            <th>
+                                #
+                            </th>
+                            <th>
+                                Author
+                            </th>
+                            <th width="80%">
+                                Comment
+                            </th>
+                        </tr>
+                        </thead>
+
+
+                        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+
+                        @for (var i = 0; i < Model.Count; i++)
+                        {
+                            @Html.Hidden("comments.Index", (@i + 10))
+
+                            @Html.Hidden("comments[" + (@i + 10) + "].Id",
+                                Model[i].Id)
+
+                            @Html.Hidden("comments[" + (@i + 10) + "].PublishDate",
+                                Model[i].PublishDate)
+
+                            @Html.Hidden("comments[" + (@i + 10) + "].BlogId",
+                                Model[i].BlogId)
+
+                            <tr id="comments">
+                                <td>
+                                    @(commentCount += 1)
+                                    @Html.CheckBox("comments[" + (@i + 10) + "].IsModerated",
+                                        Model[i].IsModerated, new {@return = "false", style = "visibility:hidden"})
+
+                                    @Html.CheckBox("comments[" + (@i + 10) + "].DeleteFromListHelpColumn",
+                                        Model[i].DeleteFromListHelpColumn, new {@return = "false", style = "visibility:hidden"})
+                                </td>
+                                <td>
+                                    @Html.Hidden("comments[" + (@i + 10) + "].AuthorId",
+                                        Model[i].AuthorId)
+                                    @GetFromContext.AuthorName(Model[i].AuthorId)
+                                </td>
+                                <td>
+                                    <strong>Post title: @GetFromContext.PostTitle(Model[i].BlogId)</strong>
+                                    <p class="text-info">Submitted on: @Model[i].PublishDate</p>
+                                    @Html.Hidden("comments[" + (@i + 10) + "].Text",
+                                        Model[i].Text)
+                                    @Model[i].Text
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+
+                    <div class="form-group text-center">
+                        <div>
+                            <input type="submit" value="Approve" class="btn btn-success" name="action:Approve"/>
+                            <input type="submit" value="Delete" class="btn btn-primary" name="action:Delete"/>
+                            <a href='@Url.Action("Moderate")' , class="btn btn-info">Clear</a>
+                        </div>
+                    </div>
+                }
+            }
+            else
+
+            {
+                <br>
+                <p class="text-info text-center">There are no new comments waiting for approval.</p>
+            }
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Shop.Models.Review>
+
+<ul>
+    @foreach (var item in Model)
+    {
+        <li>
+            <div>
+                <h4>@item.Rating / 10</h4>
+                <small>
+                    Author name: @item.Name @if (User != null && User.Identity != null && item.Name == User.Identity.Name)
+                                            {
+                                                @Html.ActionLink("Edit", "Edit", new {id = item.Id})
+                                            }
+                </small>
+            </div>
+            <p>@Html.DisplayFor(modelItem => item.Comment)</p>
+        </li>
+    }
+
+</ul>

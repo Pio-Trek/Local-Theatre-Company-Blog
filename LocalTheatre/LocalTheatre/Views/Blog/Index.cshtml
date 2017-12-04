@@ -1,0 +1,72 @@
+﻿@using System.Text.RegularExpressions
+@using LocalTheatre.Models
+@using Microsoft.Ajax.Utilities
+@model IEnumerable<Blog>
+
+@{
+    ViewBag.Title = "Blog";
+}
+
+<div class="tab-space">
+    <div class="row">
+
+        @foreach (var item in Model)
+        {
+            var imageUrl = Html.DisplayFor(modelItem => item.CoverUrl).ToString();
+
+
+            <div class="col-md-10 col-md-offset-1">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div class="text-center">
+                            <h2>@Html.DisplayFor(modelItem => item.Title)</h2>
+                        </div>
+                    </div>
+
+                    <div class="panel-body">
+                        
+                        @{
+                            if (!imageUrl.IsNullOrWhiteSpace())
+                            {
+                                <a href="@Url.Action("Details", new {id = item.Id})">
+                                    <img alt="Image" src="@imageUrl" class="img-responsive img-thumbnail center-block" style="max-height: 500px">
+                                </a>
+                                <br>
+                            }
+                        }
+
+
+                        <p class="text-justify">
+                            @Html.DisplayFor(modelItem => item.Article).ToString().Substring(1, 600);[...]
+                        </p>
+                        
+                        <button class="btn btn-primary btn-simple pull-right" onclick="location.href = '@Url.Action("Details", new {id = item.Id})';return false;">Read more&nbsp;<i class="material-icons first-icon">arrow_forward</i></button>
+
+                    </div>
+
+                    <div class="panel-footer">
+                        <a style="text-decoration: none; color: #5b5b5b;">
+                            <i class="material-icons">event</i>
+                        </a>&nbsp;@Html.DisplayFor(modelItem => item.PublishDate)
+                        <a style="text-decoration: none; color: #5b5b5b;">
+                            <i class="material-icons ">access_time</i>
+                        </a>&nbsp;@item.PublishDate.ToString("HH:mm:ss")
+                        <a style="text-decoration: none; color: #5b5b5b;">
+                            <i class="material-icons ">face</i>
+                        </a>&nbsp;@GetFromContext.AuthorName(item.AuthorId)
+                        @{
+                            var db = new ApplicationDbContext();
+                            var commentCount = db.Comments.Count(c => c.BlogId == item.Id && c.IsModerated);
+                        }
+                        <a style="text-decoration: none; color: #5b5b5b;">
+                            <i class="material-icons ">comment</i>
+                        </a>&nbsp;Comments: @commentCount
+
+                    </div>
+                </div>
+            </div>
+
+        }
+
+    </div >
+</div >

@@ -1,0 +1,111 @@
+﻿@using Microsoft.Ajax.Utilities
+@model LocalTheatre.Models.Blog
+
+@{
+    Layout = "~/Views/Shared/_LayoutSinglePage.cshtml";
+    ViewBag.Title = "Edit";
+}
+
+<script>
+    var fileToDelete = "@Model.CoverFileName";
+    var currentUrl = "@Model.CoverUrl";
+    var currentFile = "@Model.CoverFileName";
+</script>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2 col-sm-6 col-sm-offset-3">
+            <div class="card card-signup">
+                <form class="form" method="" action="">
+                    <div class="header header-danger text-center">
+                        <h4>Edit a blog post</h4>
+                    </div>
+                    <p class="text-divider">@Html.ValidationSummary("", new {@class = "text-danger"})</p>
+                    <div class="content">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                @Html.LabelFor(model => model.Title, htmlAttributes: new {@class = "control-label"})
+                            </span>
+                            @Html.EditorFor(model => model.Title, new {htmlAttributes = new {@class = "form-control"}})
+                            @Html.ValidationMessageFor(model => model.Title, "", new {@class = "text-danger"})
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                @Html.LabelFor(model => model.Article, htmlAttributes: new {@class = "control-label"})
+                            </span>
+                            @Html.TextAreaFor(model => model.Article, new {@class = "form-control", rows = "6"})
+                            @Html.ValidationMessageFor(model => model.Article, "", new {@class = "text-danger"})
+                        </div>
+
+
+                        <div class="input-group">
+                            <span class="input-group-addon">
+
+                                @if (string.IsNullOrEmpty(Model.CoverUrl))
+                                {
+                                    <label for="fileButton" class="custom-file-upload btn btn-success" data-toggle="tooltip" data-placement="top" title="Load image from computer">
+                                        <i class="material-icons">file_upload</i> Load Image
+                                    </label>
+                                    <input id="fileButton" type="file" style="display: none;"/>
+                                }
+                                else
+                                {
+                                    <input type="button" value="Delete image" class="btn btn-danger" onclick="deleteFile(false)" data-toggle="tooltip" data-placement="top" title="Delete and upload new image"/>
+
+                                    <div style="display: none;">
+                                        <input type="submit" name="deleteAndRefresh" id="deleteAndRefresh"/>
+                                    </div>
+                                }
+
+                            </span>
+
+                            <span class="input-group-addon">
+
+                                @if (Model.CoverUrl.IsNullOrWhiteSpace())
+                                {
+                                    <img id="preview" src="/images/noimage-placeholder.jpg" class="img-responsive img-thumbnail" alt=""/>
+                                }
+                                else
+                                {
+                                    <img id="preview" src="@Model.CoverUrl" class="img-responsive img-thumbnail" alt=""/>
+                                }
+
+                            </span>
+                        </div>
+
+
+                    </div>
+                    <div class="footer">
+
+                    </div>
+                    <div class="footer text-center">
+                        <a onclick="sendFile()" class="btn btn-simple btn-primary btn-lg">Save</a>
+                        &nbsp;
+                        <button class="btn btn-simple btn-info btn-lg" onclick="location.href = '@Url.Action("Details", new {id = Model.Id})';return false;"><i class="material-icons">arrow_back</i> Back</button>
+
+                    </div>
+
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" id="progressBar" style="width: 0">
+                        </div>
+                    </div>
+
+                    <input type="hidden" value="@Model.Id" name="Id"/>
+                    <input type="hidden" value="@Model.PublishDate" name="PublishDate"/>
+                    <input type="hidden" value="@Model.AuthorId" name="AuthorId"/>
+                    <input type="hidden" value="" name="CoverFileName" id="filename"/>
+                    <input type="hidden" value="" name="CoverUrl" id="fileurl"/>
+
+                    <div style="display: none;">
+                        <input type="submit" name="submitAndGoToPost" class="btn btn-default" id="btnSubmit"/>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,136 @@
+﻿@using LocalTheatre.Models
+@using Microsoft.Ajax.Utilities
+@model GroupedUserViewModel
+
+@{
+    ViewBag.Title = "Index";
+    var writerNumber = 0;
+    var userNumber = 0;
+}
+
+<div class="section section-basic">
+
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+
+            <h2 class="text-center">
+                Users List
+            </h2>
+
+            @if (Model.Writers.Any())
+            {
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center">
+                        <h4>
+                            <strong>@($"{RoleName.Writer}s")</strong>
+                        </h4>
+                    </div>
+                    <div class="panel-body">
+
+                        <table class="table table-striped table-hover ">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Profile image</th>
+                                <th>Email/Login</th>
+                                <th>Display name</th>
+                                <th>Role</th>
+                                <th>Account status</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+
+                            @foreach (var user in Model.Writers)
+                            {
+                                var trColor = "danger";
+
+                                if (user.IsEnable)
+                                {
+                                    trColor = "success";
+                                }
+
+                                <tbody>
+                                <tr class=@trColor>
+                                    <td>@(writerNumber += 1)</td>
+                                    <td>
+                                        <img src="@GetFromContext.ProfileUrl(user.Id)" class="img-thumbnail img-responsive" style="max-width: 100px">
+                                    </td>
+                                    <td>@user.Email</td>
+                                    <td>@user.DisplayName</td>
+                                    <td>@RoleName.Writer</td>
+                                    <td>@GetFromContext.AccountStatus(user.IsEnable)</td>
+                                    <td>
+                                        @Html.ActionLink("Edit", "EditUser", new {id = user.Id}, new {@class = "btn btn-success btn-xs", data_toggle = "tooltip", data_placement = "top", title = "Edit role and status" })
+                                        @Html.ActionLink("Delete", "DeleteUser", new {id = user.Id}, new {@class = "btn btn-primary btn-xs"})
+                                    </td>
+                                </tr>
+                                </tbody>
+                            }
+
+                        </table>
+                    </div>
+                </div>
+            }
+
+
+
+
+
+            @if (Model.Users.Any())
+            {
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center">
+                        <h4>
+                            <strong>@($"{RoleName.User}s")</strong>
+                        </h4>
+                    </div>
+                    <div class="panel-body">
+
+                        <table class="table table-striped table-hover ">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Profile image</th>
+                                <th>Email/Login</th>
+                                <th>Display name</th>
+                                <th>Role</th>
+                                <th>Account status</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+
+                            @foreach (var user in Model.Users)
+                            {
+                                var trColor = "danger";
+
+                                if (user.IsEnable)
+                                {
+                                    trColor = "success";
+                                }
+
+                                <tbody>
+                                <tr class=@trColor>
+                                    <td>@(userNumber += 1)</td>
+                                    <td>
+                                        <img src="@GetFromContext.ProfileUrl(user.Id)" class="img-thumbnail img-responsive" style="max-width: 100px">
+                                    </td>
+                                    <td>@user.Email</td>
+                                    <td>@user.DisplayName</td>
+                                    <td>@RoleName.User</td>
+                                    <td>@GetFromContext.AccountStatus(user.IsEnable)</td>
+                                    <td>
+                                        @Html.ActionLink("Edit", "EditUser", new { id = user.Id }, new { @class = "btn btn-success btn-xs", data_toggle = "tooltip", data_placement = "top", title = "Edit role and status" })
+                                        @Html.ActionLink("Delete", "DeleteUser", new { id = user.Id }, new { @class = "btn btn-primary btn-xs" })
+                                    </td>
+                                </tr>
+                                </tbody>
+                            }
+
+                        </table>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>

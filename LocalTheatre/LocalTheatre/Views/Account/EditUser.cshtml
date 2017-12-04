@@ -1,0 +1,94 @@
+﻿@using LocalTheatre.Models
+@model UserViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutSinglePage.cshtml";
+    ViewBag.Title = "Edit";
+}
+
+@using (Html.BeginForm())
+{
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+                <div class="card card-signup">
+                    <form class="form" method="" action="">
+                        <div class="header header-danger text-center">
+                            <h4>Change user role and status</h4>
+                        </div>
+                        <p class="text-divider">@Html.ValidationSummary("", new {@class = "text-danger"})</p>
+                        <div class="content">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="material-icons">face</i>
+                                </span>
+                                @Html.TextBoxFor(m => m.DisplayName, new {@class = "form-control", disabled = "disabled"})
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="material-icons">email</i>
+                                </span>
+                                @Html.TextBoxFor(m => m.Email, new {@class = "form-control", disabled = "disabled"})
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="material-icons">people</i>
+                                </span>
+                                @Html.TextBoxFor(m => m.Role, new {@class = "form-control", disabled = "disabled"})
+                            </div>
+                            <div class="input-group col-md-6">
+                                <span class="input-group-addon">
+                                    Change role to:
+                                </span>
+                                @Html.DropDownList("roleList", ViewData["roleList"] as SelectList, "", new {@class = "form-control"})
+                            </div>
+
+
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    Account status:
+                                </span>
+
+                                <div class="togglebutton">
+                                    <label>
+                                        @{
+                                            if (Model.IsEnable)
+                                            {
+                                                @Html.CheckBoxFor(model => model.IsEnable, new {type = "checkbox"})
+                                                @: Current is: Enabled
+                                            }
+                                            else
+                                            {
+                                                @Html.CheckBoxFor(model => model.IsEnable, new {@checked = "checked", type = "checkbox"})
+                                                @: Current is: Disabled
+                                            }
+                                        }
+                                    </label>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                        <div class="footer">
+
+                        </div>
+                        <div class="footer text-center">
+                            <input type="submit" value="Save" class="btn btn-simple btn-primary btn-lg"/>
+                            &nbsp;
+                            <button class="btn btn-simple btn-info btn-lg" onclick="location.href = '@Url.Action("UsersList")';return false;"><i class="material-icons">arrow_back</i> Back</button>
+
+                        </div>
+
+                        @Html.HiddenFor(model => model.Id)
+
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+}

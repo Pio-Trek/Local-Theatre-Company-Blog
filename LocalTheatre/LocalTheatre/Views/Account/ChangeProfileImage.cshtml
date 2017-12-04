@@ -1,0 +1,90 @@
+﻿@using Microsoft.Ajax.Utilities
+@model LocalTheatre.Models.ChangeProfileImageViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutSinglePage.cshtml";
+    ViewBag.Title = "ChangeProfileImage";
+}
+
+<script>
+    var fileToDelete = "@ViewBag.CurentProfileFileName";
+    var currentUrl = "@ViewBag.CurrentProfileUrl";
+    var currentFile = "@ViewBag.CurentProfileFileName";
+</script>
+
+
+@using (Html.BeginForm())
+{
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+                <div class="card card-signup">
+                    <form class="form" method="" action="">
+                        <div class="header header-danger text-center">
+                            <h4>Change profile image</h4>
+                        </div>
+
+                        <div class="content">
+                            @{
+                                if (!string.IsNullOrEmpty(ViewBag.CurrentProfileUrl))
+                                {
+                                    <img id="preview" src="@ViewBag.CurrentProfileUrl" class="img-responsive img-thumbnail center-block" alt="" style="max-width: 200px"/>
+                                }
+                                else
+                                {
+                                    <img id="preview" src="/images/default-avatar.png" class="img-responsive img-thumbnail center-block" alt="" style="max-width: 200px"/>
+                                }
+                            }
+
+                            <div class="footer">
+                                <div class="footer text-center">
+
+
+                                    @if (string.IsNullOrEmpty(ViewBag.CurrentProfileUrl))
+                                    {
+                                        <label for="fileButton" class="custom-file-upload btn btn-success" data-toggle="tooltip" data-placement="top" title="Load image from computer">
+                                            <i class="material-icons">file_upload</i> Load Image
+                                        </label>
+                                        <input id="fileButton" type="file" style="display: none;"/>
+                                    }
+                                    else
+                                    {
+                                        <input type="button" value="Delete image" class="btn btn-danger" onclick="deleteFile(false)" data-toggle="tooltip" data-placement="top" title="Delete and upload new image"/>
+
+                                        <div style="display: none;">
+                                            <input type="submit" name="deleteAndRefresh" id="deleteAndRefresh"/>
+                                        </div>
+                                    }
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <input type="hidden" value="" name="NewProfileFileName" id="filename"/>
+                        <input type="hidden" value="" name="NewProfileUrl" id="fileurl"/>
+
+                        <div class="footer">
+                            <div class="footer text-center">
+                                <input type="button" value="Upload" class="btn btn-simple btn-primary btn-lg" onclick="sendFile()"/>
+                            </div>
+                        </div>
+
+                        <div style="display: none;">
+                            <input type="submit" name="submitAndGoToPost" class="btn btn-default" id="btnSubmit"/>
+                        </div>
+
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" id="progressBar" style="width: 0">
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+}

@@ -1,0 +1,77 @@
+﻿@using Microsoft.AspNet.Identity
+@model LocalTheatre.Models.Blog
+
+@{
+    Layout = "~/Views/Shared/_LayoutSinglePage.cshtml";
+    ViewBag.Title = "Create new comment";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2 col-sm-6 col-sm-offset-3">
+            <div class="card card-signup">
+                <form class="form" method="" action="">
+                    <div class="header header-danger text-center">
+                        <h4>Create new blog post</h4>
+                    </div>
+                    <p class="text-divider">@Html.ValidationSummary("", new {@class = "text-danger"})</p>
+                    <div class="content">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                @Html.LabelFor(model => model.Title, htmlAttributes: new {@class = "control-label"})
+                            </span>
+                            @Html.EditorFor(model => model.Title, new {htmlAttributes = new {@class = "form-control"}})
+                            @Html.ValidationMessageFor(model => model.Title, "", new {@class = "text-danger"})
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                @Html.LabelFor(model => model.Article, htmlAttributes: new {@class = "control-label"})
+                            </span>
+                            @Html.TextAreaFor(model => model.Article, new {@class = "form-control", rows = "6"})
+                            @Html.ValidationMessageFor(model => model.Article, "", new {@class = "text-danger"})
+                        </div>
+
+
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <label for="fileButton" class="custom-file-upload btn btn-default" data-toggle="tooltip" data-placement="top" title="Upload cover image from computer">
+                                    <i class="material-icons">file_upload</i> Upload Image
+                                </label>
+                                <input id="fileButton" type="file" style="display: none;"/>
+                            </span>
+                            <span class="input-group-addon">
+                                <img id="preview" src="/images/noimage-placeholder.jpg" class="img-responsive img-thumbnail" alt=""/>
+                            </span>
+                        </div>
+
+
+                    </div>
+                    <div class="footer">
+                        <div class="footer text-center">
+                            <a onclick="sendFile()" class="btn btn-simple btn-primary btn-lg">Create</a>
+                        </div>
+                    </div>
+
+
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" id="progressBar" style="width: 0">
+                        </div>
+                    </div>
+
+                    <input type="hidden" value="@User.Identity.GetUserId()" name="AuthorId"/>
+                    <input type="hidden" value="@DateTime.Now" name="PublishDate"/>
+                    <input type="hidden" value="" name="CoverFileName" id="filename"/>
+                    <input type="hidden" value="" name="CoverUrl" id="fileurl"/>
+
+                    <div style="display: none;">
+                        <input type="submit" id="btnSubmit"/>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+}

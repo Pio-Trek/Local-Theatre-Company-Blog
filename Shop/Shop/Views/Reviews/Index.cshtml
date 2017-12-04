@@ -1,0 +1,16 @@
+﻿@model Shop.Models.Product
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h4>@Model.Name</h4>
+<hr/>
+
+<p>
+    @Html.ActionLink("Create New", "Create", new {productId = Model.Id})
+</p>
+
+@Html.Partial("_Review", Model.Reviews)
+
+@Html.ActionLink("Go back to product list", "Index", "Products")

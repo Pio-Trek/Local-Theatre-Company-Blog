@@ -1,0 +1,9 @@
+﻿@{
+    Layout = null;
+}
+
+<script>
+    var location = '@Url.Action("Details", "Blog", new {id = ViewBag.BlogId, confirm = true})';
+    var confirmation = true;
+    window.location.href(location);
+</script>

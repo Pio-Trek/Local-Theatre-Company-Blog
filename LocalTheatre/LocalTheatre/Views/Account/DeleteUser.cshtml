@@ -1,0 +1,69 @@
+﻿@using LocalTheatre.Models
+@model UserViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutSinglePage.cshtml";
+    ViewBag.Title = "DeleteUser";
+}
+
+<script>
+    var fileToDelete = "@GetFromContext.ProfileFileName(Model.Id)";
+</script>
+
+@using (Html.BeginForm())
+{
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+                <div class="card card-signup">
+                    <form class="form" method="" action="">
+                        <div class="header header-danger text-center">
+                            <h4>Are you sure you want to delete this account?</h4>
+                        </div>
+
+                        <div class="content">
+                            
+                            <img src="@GetFromContext.ProfileUrl(Model.Id)" class="img-thumbnail img-responsive center-block" style="max-width: 100px">
+
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="material-icons">face</i>
+                                </span>
+                                @Html.TextBoxFor(m => m.DisplayName, new {@class = "form-control", disabled = "disabled"})
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="material-icons">email</i>
+                                </span>
+                                @Html.TextBoxFor(m => m.Email, new {@class = "form-control", disabled = "disabled"})
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="material-icons">people</i>
+                                </span>
+                                @Html.TextBoxFor(m => m.Role, new {@class = "form-control", disabled = "disabled"})
+                            </div>
+
+
+                        </div>
+                        <div class="footer">
+
+                        </div>
+                        <div class="footer text-center">
+                            <input type="button" value="Yes" class="btn btn-simple btn-primary btn-lg" onclick="deleteFile(true)"/>
+                            &nbsp;
+                            <button class="btn btn-simple btn-info btn-lg" onclick="location.href = '@Url.Action("UsersList")';return false;">No</button>
+                        </div>
+
+                        <div style="display: none;">
+                            <input type="submit" id="btnSubmit"/>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+}

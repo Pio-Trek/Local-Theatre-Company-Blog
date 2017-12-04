@@ -1,0 +1,62 @@
+﻿@model LocalTheatre.Models.ChangeEmailViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutSinglePage.cshtml";
+    ViewBag.Title = "Change email";
+}
+
+@using (Html.BeginForm())
+{
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+                <div class="card card-signup">
+                    <form class="form" method="" action="">
+                        <div class="header header-danger text-center">
+                            <h4>Change login/email</h4>
+                        </div>
+
+                        <div class="content">
+
+                            @if (ViewBag.Confirmation != null)
+                            {
+                                <br>
+                                <div class="alert alert-info">
+                                    <div class="container-fluid">
+                                        <div class="alert-icon">
+                                            <i class="material-icons">info_outline</i>
+                                        </div>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">
+                                                <i class="material-icons">clear</i>
+                                            </span>
+                                        </button>
+                                        <p>@ViewBag.Confirmation</p>
+                                    </div>
+                                </div>
+                            }
+
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="material-icons">email</i>
+                                </span>
+                                @Html.EditorFor(model => model.NewEmail, new {htmlAttributes = new {@class = "form-control", @Value = @ViewBag.CurrentEmail}})
+                                @Html.ValidationMessageFor(model => model.NewEmail, "", new {@class = "text-danger"})
+                            </div>
+
+                        </div>
+                        <div class="footer">
+
+                        </div>
+                        <div class="footer text-center">
+                            <input type="submit" value="Save" class="btn btn-simple btn-primary btn-lg"/>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+}

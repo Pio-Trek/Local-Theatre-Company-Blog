@@ -1,0 +1,78 @@
+﻿@using LocalTheatre.Models
+@model IEnumerable<Comment>
+
+
+@{
+    var commentNumber = 0;
+
+    var commentCount = Model.Count(c => c.IsModerated);
+
+    if (commentCount == 0)
+    {
+        <div class="tab-space">
+            <p class="text-info">There are no comments yet. Be the first to comment.</p>
+        </div>
+    }
+}
+
+
+    @foreach (var item in Model)
+    {
+        if (item.IsModerated)
+        {
+            <div class="row">
+                <div class="col-md-offset-1 col-md-1" style="max-width: 100px">
+                    <img src="@GetFromContext.ProfileUrl(item.AuthorId)" class="img-thumbnail img-responsive">
+                </div>
+
+                <div class="col-md-9">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+
+
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <strong>@GetFromContext.AuthorName(item.AuthorId)</strong>
+                                        <span class="text-muted">
+                                            @{
+                                                var daysAgo = GetFromContext.DayCount(Html.DisplayFor(modelItem => item.PublishDate).ToString());
+
+                                                if (daysAgo < 1)
+                                                {
+                                                    @Html.Raw("commented in the last 24 hours")
+                                                }
+                                                else if (daysAgo < 2 && daysAgo > 1)
+                                                {
+                                                    @Html.Raw($"commented {daysAgo:0} day ago")
+                                                }
+                                                else
+                                                {
+                                                    @Html.Raw($"commented {daysAgo:0} days ago")
+                                                }
+                                            }
+                                        </span>
+                                    </div>
+                                    <div class="col-md-offset-2 col-md-2 text-center">
+                                        #@(commentNumber += 1)
+
+                                        @if (User.IsInRole(RoleName.Admin) || User.IsInRole(RoleName.Writer))
+                                        {
+                                            @Html.Raw("&nbsp;")
+                                            @Html.ActionLink("Delete", "Delete", "Comment", new { id = item.Id }, new { @class = "btn btn-primary btn-xs btn-in-table" })
+                                        }
+
+                                        @Html.Raw("&nbsp;")
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            @Html.DisplayFor(modelItem => item.Text)
+                        </div>
+                    </div>
+                </div>
+            </div>
+                                                    }
+                                                }
