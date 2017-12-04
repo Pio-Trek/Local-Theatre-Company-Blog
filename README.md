@@ -3,15 +3,6 @@
 This web app was created as an assessment project for Web Application for "Developing Websites for Multiplatform" Unit.
 The Local Theatre Company is a blog platform created using C# and ASP.NET MVC 5 framework. The web page is fully responsive (render well on a variety of devices and window or screen sizes).
 
-### Sample Blog Post Screen
-![Blog Post screen](https://github.com/Pio-Trek/Local-Theatre-Company-Blog/blob/master/art/blog_post.jpg)
-
-### Users List (admin settings)
-![Users List](https://github.com/Pio-Trek/Local-Theatre-Company-Blog/blob/master/art/admin_users_list.jpg)
-
-### Contact Page
-![Contact Page](https://github.com/Pio-Trek/Local-Theatre-Company-Blog/blob/master/art/contact_page.jpg)#
-
 ## Features
 
 - Register new users
@@ -22,12 +13,14 @@ The Local Theatre Company is a blog platform created using C# and ASP.NET MVC 5 
 - Add/Update/Remove blog post and profile image
 - Change account details (login, password, name etc.)
 
+### Sample Blog Post Screen
+![Blog Post screen](https://github.com/Pio-Trek/Local-Theatre-Company-Blog/blob/master/art/blog_post.jpg)
 
-## Pre-requisites
+### Users List (admin settings)
+![Users List](https://github.com/Pio-Trek/Local-Theatre-Company-Blog/blob/master/art/admin_users_list.jpg)
 
-- IIS 7+
-- ASP.NET MVC 4.6.1
-- Visual Studio 2017
+### Contact Page
+![Contact Page](https://github.com/Pio-Trek/Local-Theatre-Company-Blog/blob/master/art/contact_page.jpg)
 
 ## Getting Started
 
@@ -36,6 +29,12 @@ Admin Demo Login: (USERNAME: Admin, PASSWORD: 123Qwe)
 Writer Demo Login: (USERNAME: Writer1, PASSWORD: 123Qwe)
 
 User Demo Login: (USERNAME: User1, PASSWORD: 123Qwe)
+
+## Pre-requisites
+
+- IIS 7+
+- ASP.NET MVC 4.6.1
+- Visual Studio 2017
 
 ## License
 
