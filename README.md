@@ -1,6 +1,6 @@
 # 💃 Local Theatre Company Blog 🕺
 
-This web app was created as an assessment project for Web Application for "Developing Websites for Multiplatform" Unit.
+This web app was created as an assessment project for "Developing Websites for Multiplatform" Unit.
 The Local Theatre Company is a blog platform created using C# and ASP.NET MVC 5 framework. The web page is fully responsive (render well on a variety of devices and window or screen sizes).
 
 ## Features
