@@ -1,4 +1,4 @@
-![Local Theatre Company Blog](https://github.com/Pio-Trek/YetAnotherWeatherApp/blob/master/art/banner.png)
+![Local Theatre Company Blog](https://github.com/Pio-Trek/Local-Theatre-Company-Blog/blob/master/art/banner.png)
 
 # 💃 Local Theatre Company Blog 🕺
 
@@ -6,13 +6,13 @@ This web app was created as an assessment project for Web Application for "Devel
 The Local Theatre Company is a blog platform crated using C# and ASP.NET MVC 5 framework. It allows to sign up new user, posting a blog post, moderate comment, edit users list and much more.
 
 ###### Sample Blog Post Screen
-![Blog Post screen](https://github.com/Pio-Trek/YetAnotherWeatherApp/blob/master/art/blog_post.jpg)
+![Blog Post screen](https://github.com/Pio-Trek/Local-Theatre-Company-Blog/blob/master/art/blog_post.jpg)
 
 ###### Users List (admin settings)
-![Users List](https://github.com/Pio-Trek/YetAnotherWeatherApp/blob/master/art/admin_users_lists.jpg)
+![Users List](https://github.com/Pio-Trek/Local-Theatre-Company-Blog/blob/master/art/admin_users_lists.jpg)
 
 ###### Contact Page
-![Contact Page](https://github.com/Pio-Trek/YetAnotherWeatherApp/blob/master/art/contact_page.jpg)
+![Contact Page](https://github.com/Pio-Trek/Local-Theatre-Company-Blog/blob/master/art/contact_page.jpg)
 
 ## Pre-requisites
 
@@ -23,7 +23,9 @@ The Local Theatre Company is a blog platform crated using C# and ASP.NET MVC 5 f
 ## Getting Started
 
 Admin Demo Login: (USERNAME: Admin, PASSWORD: 123Qwe)
+
 Writer Demo Login: (USERNAME: Writer1, PASSWORD: 123Qwe)
+
 User Demo Login: (USERNAME: User1, PASSWORD: 123Qwe)
 
 ## License
