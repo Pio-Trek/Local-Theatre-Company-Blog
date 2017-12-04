@@ -1,5 +1,3 @@
-![Local Theatre Company Blog](https://github.com/Pio-Trek/Local-Theatre-Company-Blog/blob/master/art/banner.png)
-
 # 💃 Local Theatre Company Blog 🕺
 
 This web app was created as an assessment project for Web Application for "Developing Websites for Multiplatform" Unit.
