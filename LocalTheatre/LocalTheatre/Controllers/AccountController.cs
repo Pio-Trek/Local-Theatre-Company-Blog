@@ -206,7 +206,7 @@ namespace LocalTheatre.Controllers
         }
 
 
-        // GET: /Account/ChangeName
+        // GET: /Account/ChangeProfileImage
         [Authorize]
         public ActionResult ChangeProfileImage()
         {

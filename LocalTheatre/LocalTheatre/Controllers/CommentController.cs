@@ -82,7 +82,7 @@ namespace LocalTheatre.Controllers
             return View(model);
         }
 
-        // POST: Comment/List
+        // POST: Comment/Moderate
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = RoleName.Admin + "," + RoleName.Writer)]
