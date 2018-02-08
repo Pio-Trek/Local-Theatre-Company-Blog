@@ -24,11 +24,11 @@ The Local Theatre Company is a blog platform created using C# and ASP.NET MVC 5 
 
 ## Getting Started
 
-Admin Demo Login: (USERNAME: Admin, PASSWORD: 123Qwe)
+Admin Demo Login: (USERNAME: Admin, PASSWORD: 123qwe)
 
-Writer Demo Login: (USERNAME: Writer1, PASSWORD: 123Qwe)
+Writer Demo Login: (USERNAME: Writer1, PASSWORD: 123qwe)
 
-User Demo Login: (USERNAME: User1, PASSWORD: 123Qwe)
+User Demo Login: (USERNAME: User1, PASSWORD: 123qwe)
 
 ## Pre-requisites
 
