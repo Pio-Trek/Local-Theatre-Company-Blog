@@ -314,6 +314,8 @@
     <Content Include="sass\material-kit\_variables_bootstrap.scss" />
     <Content Include="sass\material-kit\_welljumbo.scss" />
     <Content Include="images\favicons\manifest.json" />
+    <Content Include="ClassDiagram7.cd" />
+    <Content Include="ClassDiagram8.cd" />
     <None Include="Properties\PublishProfiles\LocalTheatre20171115044956 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\LocalTheatre20171115050229 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
